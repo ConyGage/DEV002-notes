@@ -2,7 +2,7 @@ import { useAuth } from "../context/authContext";
 import { TaskList } from './TaskList';
 import { TaskForm } from './TaskForm';
 import "./css-components/home.css";
-import { app } from "../Firebase";
+// import { app } from "../Firebase";
 
 
 export function Home() {

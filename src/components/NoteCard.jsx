@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { NoteContext } from "../context/NoteContext"
 import "./css-components/NoteCard.css";
+import { getNote } from "./tasks";
 
 export function NoteCard({ journal }) {
 
@@ -16,7 +17,7 @@ export function NoteCard({ journal }) {
                     <h2 className="card-title">{journal.title} </h2>
                     <p className="nc-description">{journal.description} </p>
                     <div className="dad-delete">
-                        <i onClick={() => setEditNote(journal.id)} className="material-icons">edit</i>
+                        <i onClick={() => getNote(journal.id)} className="material-icons">edit</i>
                         <i onClick={() => deleteNote(journal.id)} className="material-icons">delete</i>
                     </div>
                 </div>

@@ -7,16 +7,20 @@ export const db = getFirestore();
 export const NoteContext = createContext();
 
 export function NoteContextProvider(props) {
+    const [journals, setJournals] = useState([])
     const [journal, setJournal] = useState([])
+    const [title, setTitle] = useState(journals?.title || '');
+    const [description, setDescription] = useState(journals?.description || '');
 
+console.log(journals)
     useEffect(() => {
         onSnapshot(collection(db, "notes"), (querySnapshot) => { //ordenarle en fecha tal vez sort(...data)
             const docs = [];
             querySnapshot.forEach((doc) => {
                 docs.push({ ...doc.data(), id: doc.id });
             });
-            setJournal(docs);
-            // console.log(doc.id);
+            setJournals(docs);
+            console.log({docs});
 
         })
 
@@ -48,35 +52,22 @@ export function NoteContextProvider(props) {
     // Función de Editar-----------------------------------------------------------
 
     const [editNote, setEditNote] = useState('')
-    const getNote = async (journal) => {
-        try {
-            console.log(id)
-            const docRef = doc(db, 'notes', journal.id)
-            const docSnap = await getDoc(docRef)
-            createNote(docSnap.data())
-        } catch (error) {
-            // console.log(error);
-        }
-    }
-
-    console.log (journal)
-
-    useEffect(() => {
-        if (editNote !== '') {
-            getNote(editNote)
-        }
-    }, [editNote])
+    
 
     // Renderizado------------------------------
 
     return (
         <NoteContext.Provider
             value={{
-                journal,
+                journals,
                 deleteNote,
                 createNote,
                 editNote,
-                setEditNote
+                setEditNote,
+                title,
+                setTitle,
+                description,
+                setDescription
             }}>
             {props.children}
         </NoteContext.Provider >

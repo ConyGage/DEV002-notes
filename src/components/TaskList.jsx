@@ -4,15 +4,17 @@ import { NoteContext } from '../context/NoteContext';
 
 export function TaskList() {
 
-    const { journal } = useContext(NoteContext)
+    const { journals } = useContext(NoteContext)
 
-    if (journal.length === 0) {
+    if (journals.length === 0) {
         return <h1>NO HAY TAREAS AUN</h1>
     }
+console.log(journals)
+
 
     return (
         <>{
-            journal.map((journal) => (
+            journals.length >=1 && journals.map((journal) => (
                 <NoteCard key={journal.id} journal={journal} />
             ))}
         </>

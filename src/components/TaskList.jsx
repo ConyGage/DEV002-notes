@@ -1,6 +1,6 @@
 import { NoteCard } from './NoteCard'
 
-export function TaskList({ tasks, deleteNote }) {
+export function TaskList({ tasks, deleteNote, setEditNote }) {
 
     if (tasks.length === 0) {
         return <h1>NO HAY TAREAS AUN</h1>
@@ -8,7 +8,7 @@ export function TaskList({ tasks, deleteNote }) {
     return (
         <>{
             tasks.map((task) => (
-                <NoteCard key={task.id} task={task} deleteNote={deleteNote} />
+                <NoteCard key={task.id} task={task} deleteNote={deleteNote} setEditNote={setEditNote}/>
             ))}
         </>
     );

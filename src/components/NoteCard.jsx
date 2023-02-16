@@ -1,7 +1,7 @@
 import "./css-components/NoteCard.css";
-import { deleteDoc, doc, setDoc, collection } from "firebase/firestore";
+import { deleteDoc, doc, } from "firebase/firestore";
 import { db } from "./Home";
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 
 // Función de borrado--------------------------------------------------------
  const deleteNote = async (id) => {
@@ -10,27 +10,7 @@ import { useState, useEffect } from "react";
 
 }
 
-// Función de Editar-----------------------------------------------------------
-
-const [editNote, setEditNote] = useState('')
-const getNote = async (journal) => {
-    try {
-        console.log(id)
-        const docRef = doc(db, 'notes', journal.id)
-        const docSnap = await getDoc(docRef)
-        createNote(docSnap.data())
-    } catch (error) {
-        // console.log(error);
-    }
-}
-
-useEffect(() => {
-    if (editNote !== '') {
-        getNote(editNote)
-    }
-}, [editNote])
-
-export function NoteCard({ task}) {
+export function NoteCard({ task, setEditNote }) {
 
     return (
 
@@ -40,7 +20,7 @@ export function NoteCard({ task}) {
                     <h2 className="card-title">{task.title} </h2>
                     <p className="nc-description">{task.description} </p>
                     <div className="dad-delete">
-                        <i onClick={() => editNote(task.id)} className="material-icons">edit</i>
+                        <i onClick={() => setEditNote(task.id)} className="material-icons">edit</i>
                         <i onClick={() => deleteNote(task.id)} className="material-icons">delete</i>
                     </div>
                 </div>
